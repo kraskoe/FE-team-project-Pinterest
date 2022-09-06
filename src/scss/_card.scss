@@ -1,0 +1,75 @@
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    background-color: white;
+    object-fit: cover;
+    &__img{
+        position: relative;
+        border-radius: 2rem;
+        width: 100%;
+        &-save{
+            border: none;
+            background-color: red;
+            color: #f4f4f7;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+            position: absolute;
+            top: 5%;
+            left: 75%;
+            z-index: 5;
+        }
+        &-add{
+            display: none;
+            position: absolute;
+            top: 65%;
+            left: 75%;
+            z-index: 5;
+        }
+        &-hide{
+            display: none;
+            position: absolute;
+            top: 65%;
+            left: 65%;
+            z-index: 5;
+        }
+    }
+    &__user{
+        display: flex;
+        // align-content: space-between ;
+        align-items: center;
+        &-photo{
+            border-radius: 10rem;
+            height: 10%;
+            width: 10%;
+        }
+        &-name{
+            padding: 1rem;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &:hover .card__photo{
+        
+        background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5));
+    }
+    &:hover .card__img{
+        z-index: -1;
+    }
+    &:hover .card__img-save  {
+        display: block;
+    }
+    &:hover .card__img-add  {
+        display: block;
+    }
+    &:hover .card__img-hide  {
+        display: block;
+    }
+}
