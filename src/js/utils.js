@@ -4,9 +4,7 @@ function getHiddenPins() {
     : [];
 }
 function setHiddenPins(array) {
-  let items = [];
-  items.push(...array);
-  localStorage.setItem("hidden", JSON.stringify(items));
+  localStorage.setItem("hidden", JSON.stringify(array));
 }
 
 function getDesks() {
@@ -19,9 +17,7 @@ function getDesks() {
       ];
 }
 function setDesks(array) {
-  let items = [];
-  items.push(...array);
-  localStorage.setItem("desks", JSON.stringify(items));
+  localStorage.setItem("desks", JSON.stringify(array));
 }
 
 function getCards() {
@@ -30,7 +26,5 @@ function getCards() {
     : [];
 }
 function setCards(array) {
-  let items = [];
-  items.push(...array);
-  localStorage.setItem("cards", JSON.stringify(items));
+  localStorage.setItem("cards", JSON.stringify(array));
 }
