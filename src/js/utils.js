@@ -28,3 +28,5 @@ function getCards() {
 function setCards(array) {
   localStorage.setItem("cards", JSON.stringify(array));
 }
+
+export { setHiddenPins, setDesks, setCards, getHiddenPins, getDesks, getCards };
