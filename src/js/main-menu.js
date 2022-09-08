@@ -69,7 +69,6 @@ function  buildDeskMenu(mode) {
         deskScreen.append( wrapperDown);
 
     }
-    document.body.append(deskScreen);
     return deskScreen;
 }
 

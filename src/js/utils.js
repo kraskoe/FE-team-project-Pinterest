@@ -21,12 +21,9 @@ function setDesks(array) {
 }
 
 function getCards() {
-  return new Promise((resolve, reject) => {
-    getPromiseCards()
-      .then(resolve => resolve.json())
-      .then(data => resolve(data))
-      .catch(e => console.log(`Error: ${e}`))
-  })
+  return localStorage.getItem("cards")
+    ? JSON.parse(localStorage.getItem("cards"))
+    : [];
 }
 
 function setCards(array) {
@@ -46,6 +43,4 @@ function getPromiseCards() {
   });
 }
 
-
-
-export { setHiddenPins, setDesks, setCards, getHiddenPins, getDesks, getCards };
+export { setHiddenPins, setDesks, setCards, getHiddenPins, getDesks, getCards, getPromiseCards };
