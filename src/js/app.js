@@ -23,4 +23,4 @@ let scrt = document.createElement("script");
 scrt.src = `https://kit.fontawesome.com/7b1e4a4b61.js`;
 scrt.crossOrigin = `anonymous`;
 document.querySelector("body").append(scrt);
-//////////
+
