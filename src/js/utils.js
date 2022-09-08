@@ -21,12 +21,31 @@ function setDesks(array) {
 }
 
 function getCards() {
-  return localStorage.getItem("cards")
-    ? JSON.parse(localStorage.getItem("cards"))
-    : [];
+  return new Promise((resolve, reject) => {
+    getPromiseCards()
+      .then(resolve => resolve.json())
+      .then(data => resolve(data))
+      .catch(e => console.log(`Error: ${e}`))
+  })
 }
+
 function setCards(array) {
   localStorage.setItem("cards", JSON.stringify(array));
 }
+
+function getPromiseCards() {
+  return new Promise((resolve, reject) => {
+    fetch('https://script.google.com/macros/s/AKfycbyf_dq6dWVvlt5so3VQjvZC0K-UfsHEzXqaCaBHbe4bjMdCDGP2D3RmzuIHfJniWg/exec')
+      .then(response => {
+        if (response.ok && response.headers.get("Content-Type").includes("application/json")) {
+          resolve(response);
+        } else {
+          reject(new Error('Fetch error'));
+        }
+      })
+  });
+}
+
+
 
 export { setHiddenPins, setDesks, setCards, getHiddenPins, getDesks, getCards };

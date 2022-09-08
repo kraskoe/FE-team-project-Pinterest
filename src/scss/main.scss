@@ -1,1 +1,8 @@
-@import url('../scss/main-menu.scss');
+@import url('../scss/_main-menu.scss');
+@import url('../scss/_card.scss');
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
