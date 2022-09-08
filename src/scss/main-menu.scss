@@ -1,0 +1,144 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#main-menu{
+  max-width: 1170px;
+  width: 60%;
+  margin: 10px auto;
+  position: relative;
+}
+.main-manu__search {
+  width: 70%;
+  padding: 10px 12px;
+  border-radius: 27px;
+  font-size: 15px;
+  background-color: #dcdcdc;
+  border: none;
+  color: #333;
+}
+.main-menu__logo{
+  width: 42px;
+  height: 40px;
+  object-fit: cover;
+  position: relative;
+  top: 15px;
+  left: -15px;
+}
+.main-menu__list{
+  width: 42%;
+  max-width: 125px;
+  height: 40px;
+  border-radius: 27px;
+  background-color: white;
+  color: black;
+  font-weight: 400;
+  border: 1px solid white;
+  margin-left: 10px;
+}
+.main-menu__list:hover{
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+}
+
+.desk{
+  box-shadow: 0 5px 19px 8px rgba(72, 92, 107, 0.17);
+  width: 300px;
+  border: 2px solid white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 205px;
+}
+.wrapper__item{
+  width: 100%;
+  margin: 8px 0px 8px 10px;
+  display:flex;
+}
+.desk-item__input-true{
+  width: 90%;
+  padding: 2px;
+  border-radius: 22px;
+  margin:0 auto;
+  border:none;
+}
+.desk__btn-edit_item,
+.desk__btn-delete_item,
+.desk__btn-save_item,
+.desk__btn-cancel_item{
+  width: 48px;
+  padding: 1px; 
+  background-color: white;
+  color: black;
+  border: 2px solid #343434;
+  border-radius: 20px;
+  margin: 0 3px;
+  text-align: center;
+  font-size: 12px;
+}
+.desk__btn-edit_item,
+.desk__btn-save_item{
+  width: 40px;
+}
+.wrapper__down{
+  width: 97%;
+  display: flex;
+  margin: 10px 5px;
+}
+.wrapper__up{
+  padding: 2px;
+}
+.desk__input{
+  padding: 8px;
+  background-color: #b7b7b7;
+  width: 45%;
+  margin-left: 3px;
+  margin-right: 6px;
+  border-radius: 15px;
+  border: none;
+}
+.desk__btn_add{
+  padding: 8px;
+  border: none;
+  border-radius: 15px;
+  background-color: #e4e4e4;
+  width: 100%;
+  text-align: center;
+}
+.desk__btn_save, .desk__btn_cansel{
+  border: none;
+  border-radius: 22px;;
+  background-color: #e4e4e4;
+  width: 23%;
+  margin: 0 5px 0 5px;
+
+}
+.desk-item__input-false{
+  border-radius: 15px;
+   border:none;
+   width: 55%;
+   margin-right: 10px;
+ }
+.desk__wrapper{
+
+}
+.desk__btn-edit_item:hover,
+.desk__btn-save_item:hover,
+.desk__btn-cancel_item:hover,
+.desk__btn-delete_item:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+}
+.desk__btn_add:hover,
+.desk__btn_save:hover,
+.desk__btn_cansel:hover{
+  background-color: rgb(190, 17, 0);
+  color: whitesmoke;
+  cursor: pointer;
+}
