@@ -1,25 +1,27 @@
 #main-menu{
-  max-width: 1170px;
-  width: 60%;
-  margin: 10px auto;
+  width: 100%;
+  padding: 15px;
   position: relative;
+  display: flex;
+  justify-content: space-around;
 }
 .main-manu__search {
-  width: 70%;
+  width: 100%;
   padding: 10px 12px;
   border-radius: 27px;
   font-size: 15px;
   background-color: #dcdcdc;
   border: none;
   color: #333;
+  flex: (1, 0, auto);
 }
 .main-menu__logo{
   width: 42px;
   height: 40px;
   object-fit: cover;
   position: relative;
-  top: 15px;
-  left: -15px;
+  top: 0;
+  left: -7px;
 }
 .main-menu__list{
   width: 42%;
@@ -38,28 +40,39 @@
   color: white;
   cursor: pointer;
 }
-
+.false{
+  width: 300px !important;
+  position: absolute !important;
+  top:67px !important;
+  right: 0 !important;
+}
 .desk{
   box-shadow: 0 5px 19px 8px rgba(72, 92, 107, 0.17);
-  width: 300px;
+  width: 215px;
+  min-height: 40px;
   border: 2px solid white;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 205px;
+  top:243px;
+  right: 0;
+  z-index: 6;
+  background-color:white;
 }
 .wrapper__item{
   width: 100%;
-  margin: 8px 0px 8px 10px;
+  margin: 8px 0;
+  padding-left: 5px;
   display:flex;
 }
 .desk-item__input-true{
   width: 90%;
-  padding: 2px;
+  padding: 2px 0px 2px 13px;
   border-radius: 22px;
   margin:0 auto;
   border:none;
+  color: #343434;
 }
 .desk__btn-edit_item,
 .desk__btn-delete_item,
@@ -110,17 +123,15 @@
   background-color: #e4e4e4;
   width: 23%;
   margin: 0 5px 0 5px;
-
 }
 .desk-item__input-false{
   border-radius: 15px;
    border:none;
    width: 55%;
    margin-right: 10px;
+  padding-left: 13px;
+  color: #343434;
  }
-.desk__wrapper{
-
-}
 .desk__btn-edit_item:hover,
 .desk__btn-save_item:hover,
 .desk__btn-cancel_item:hover,
