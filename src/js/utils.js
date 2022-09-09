@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 function getHiddenPins() {
   return localStorage.getItem("hidden")
     ? JSON.parse(localStorage.getItem("hidden"))
@@ -11,9 +13,9 @@ function getDesks() {
   return localStorage.getItem("desks")
     ? JSON.parse(localStorage.getItem("desks"))
     : [
-        { name: "Desk 1", cards: [] },
-        { name: "Desk 2", cards: [] },
-        { name: "Desk 3", cards: [] },
+        { id: uuidv4(), name: "Desk 1", cards: [] },
+        { id: uuidv4(), name: "Desk 2", cards: [] },
+        { id: uuidv4(), name: "Desk 3", cards: [] },
       ];
 }
 function setDesks(array) {
