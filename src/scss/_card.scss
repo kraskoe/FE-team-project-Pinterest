@@ -1,11 +1,15 @@
 .card {
-    position: relative;
+    //position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     background-color: white;
     object-fit: cover;
 }
+.card__photo {
+    position: relative;
+}
+
 .card__img {
     filter: brightness(1);
     position: relative;
@@ -13,10 +17,11 @@
     width: 100%;
 }
 .card__img-save {
+    text-transform: capitalize;
     border: none;
     background-color: red;
     color: #f4f4f7;
-    padding: 0.2rem;
+    padding: 0.4rem;
     border-radius: 0.5rem;
     display: none;
     position: absolute;
@@ -25,29 +30,47 @@
     z-index: 5;
 }
 .card__img-add {
+    border: none;
+    text-transform: capitalize;
+    background-color: #919090;
+    color: #0a0a0a;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
     display: none;
     position: absolute;
-    bottom: 60px;
-    right: 40px;
+    bottom: 1rem;
+    right: 3.5rem;
     z-index: 5;
 }
 .card__img-hide {
+    border: none;
+    text-transform: capitalize;
+    background-color: #919090;
+    color: #0a0a0a;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
     display: none;
     position: absolute;
-    bottom: 60px;
-    right: 8px;
+    bottom: 1rem;
+    right: 0.5rem;
     z-index: 5;
 }
 .card__user {
     display: flex;
     align-items: center;
 }
+.card__user:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 .card__user-photo {
     border-radius: 50%;
-    width: 15%;
+    width: 40px;
+    height: 40px;
+    padding: 0.3rem;
 }
 .card__user-name {
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 0.75rem;
     text-align: center;
 }
@@ -55,17 +78,31 @@
 
 .card:hover .card__img {
     filter: brightness(0.5);
+    cursor: crosshair;
 }
 
 .card:hover .card__img-save  {
     display: block;
-    cursor: pointer;
 }
 .card:hover .card__img-add  {
     display: block;
-    cursor: pointer;
 }
 .card:hover .card__img-hide  {
     display: block;
+}
+.card__img-hide:hover   {
+     cursor: pointer;
+     background-color: #c9c6c7;
+ }
+.card__img-add:hover   {
+      cursor: pointer;
+    background-color: #c9c6c7;
+  }
+.card__img-save:hover   {
     cursor: pointer;
+    background-color: crimson;
+}
+
+.blur {
+    filter: blur(5px) brightness(0.5);
 }
