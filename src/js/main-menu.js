@@ -1,3 +1,5 @@
+import {getDesks} from "./utils";
+
 function buildMainMenu() {
     const menuSection = document.createElement('section');
     const menuLogo = document.createElement('img');
@@ -14,14 +16,15 @@ function buildMainMenu() {
     menuInput.classList.add("main-manu__search");
     menuInput.setAttribute('type', 'text');
     menuInput.setAttribute('placeholder', 'Поиск');
-    
+
     menuList.classList.add("main-menu__list");
     menuList.textContent = 'Выбрать доску';
 
+    menuSection.append(buildDeskMenu(1));
     menuSection.append(menuLogo, menuInput, menuList);
     root.append(menuSection);
     return menuSection;
-}
+    }
 function  buildDeskMenu(mode) {
 
     let deskScreen = document.createElement('div');
@@ -33,14 +36,9 @@ function  buildDeskMenu(mode) {
     let saveBtnDesk;
     let canselBtnDesk;
     let wrapperDown;
-    const arrayDesk = [
-        {id:1},
-        {id:2},
-        {id:3}
-    ];
-
+    const arrayDesk = getDesks();
     deskScreen.classList.add('desk');
-    arrayDesk.forEach(item =>  itemWrapperUp.append(buildItemDesk(mode, item.id)));
+    arrayDesk.forEach(item =>  itemWrapperUp.append(buildItemDesk(mode, item.id, item.name)));
     deskScreen.append(itemWrapperUp);
 
     if (mode === 1){
@@ -51,6 +49,7 @@ function  buildDeskMenu(mode) {
         saveBtnDesk = document.createElement('button');
         canselBtnDesk = document.createElement('button');
 
+        deskScreen.classList.add('false')
         wrapperDown.classList.add('wrapper__down');
         inputDesk.classList.add('desk__input');
         addBtnDesk.classList.add('desk__btn_add');
@@ -67,12 +66,12 @@ function  buildDeskMenu(mode) {
 
         wrapperDown.append(addBtnDesk, inputDesk, saveBtnDesk, canselBtnDesk);
         deskScreen.append( wrapperDown);
-
     }
+    deskScreen.style.display = 'none';
     return deskScreen;
 }
 
-function buildItemDesk(mode, id) {
+function buildItemDesk(mode, id, name) {
     let itemDesk;
     let wrapperItem;
     let editBtnItem;
@@ -82,17 +81,18 @@ function buildItemDesk(mode, id) {
 
     itemDesk = document.createElement('input');
     wrapperItem = document.createElement('div');
-    wrapperItem.classList.add('wrapper__item')
-    itemDesk.classList.add('desk-item__input-true');
+    wrapperItem.classList.add('wrapper__item');
+    itemDesk.setAttribute('value', `${name}`);
     itemDesk.setAttribute('type', 'text');
-    itemDesk.setAttribute('date', `${id}'`);
+    itemDesk.dataset.id = id;
+    itemDesk.readOnly = true;
 
     wrapperItem.append(itemDesk);
+    if(mode === 1){
+        itemDesk.classList.add('desk-item__input-false');
+    }else itemDesk.classList.add('desk-item__input-true');
 
     if (mode === 1) {
-        itemDesk.classList.remove('desk-item__input-true');
-        itemDesk.classList.add('desk-item__input-false');
-
         editBtnItem = document.createElement('button');
         saveBtnItem = document.createElement('button');
         cancelBtnItem = document.createElement('button');
