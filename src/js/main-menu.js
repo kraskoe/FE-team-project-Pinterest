@@ -1,4 +1,5 @@
-import {getDesks} from "./utils";
+import {getDesks, setDesks} from "./utils";
+import {buildMainArea} from "./main-area";
 
 function buildMainMenu() {
     const menuSection = document.createElement('section');
@@ -20,11 +21,21 @@ function buildMainMenu() {
     menuList.classList.add("main-menu__list");
     menuList.textContent = 'Выбрать доску';
 
-    menuSection.append(buildDeskMenu(1));
+    let deskScreen = buildDeskMenu(0);
+    deskScreen.style.display = 'none';
+
+    menuSection.append(deskScreen);
     menuSection.append(menuLogo, menuInput, menuList);
+
     root.append(menuSection);
+
+    menuList.addEventListener('click',function () {
+        deskScreen.style.display = 'block';
+    })
+
     return menuSection;
     }
+
 function  buildDeskMenu(mode) {
 
     let deskScreen = document.createElement('div');
@@ -36,6 +47,7 @@ function  buildDeskMenu(mode) {
     let saveBtnDesk;
     let canselBtnDesk;
     let wrapperDown;
+
     const arrayDesk = getDesks();
     deskScreen.classList.add('desk');
     arrayDesk.forEach(item =>  itemWrapperUp.append(buildItemDesk(mode, item.id, item.name)));
@@ -49,7 +61,7 @@ function  buildDeskMenu(mode) {
         saveBtnDesk = document.createElement('button');
         canselBtnDesk = document.createElement('button');
 
-        deskScreen.classList.add('false')
+        deskScreen.classList.add('false');
         wrapperDown.classList.add('wrapper__down');
         inputDesk.classList.add('desk__input');
         addBtnDesk.classList.add('desk__btn_add');
@@ -66,8 +78,15 @@ function  buildDeskMenu(mode) {
 
         wrapperDown.append(addBtnDesk, inputDesk, saveBtnDesk, canselBtnDesk);
         deskScreen.append( wrapperDown);
+
+        addBtnDesk.addEventListener('click', function () {
+            canselBtnDesk.style.display = 'block';
+            saveBtnDesk.style.display = 'block';
+            inputDesk.style.display = 'block';
+            addBtnDesk.style.display = 'none';
+         })
     }
-    deskScreen.style.display = 'none';
+    
     return deskScreen;
 }
 
@@ -107,13 +126,21 @@ function buildItemDesk(mode, id, name) {
         saveBtnItem.textContent = 'Save';
         cancelBtnItem.textContent = 'Cancel';
         deleteBtnItem.textContent = 'Delete';
+        deleteBtnItem.dataset.id = id;
 
         saveBtnItem.style.display = "none";
         cancelBtnItem.style.display = "none";
 
         wrapperItem.append(editBtnItem, saveBtnItem, cancelBtnItem, deleteBtnItem);
-    }
 
+        editBtnItem.addEventListener('click', function () {
+            editBtnItem.style.display = "none";
+            deleteBtnItem.style.display = "none";
+            saveBtnItem.style.display = "block";
+            cancelBtnItem.style.display = "block";
+            itemDesk.readOnly = false;
+        })
+    }
     return wrapperItem;
 }
 

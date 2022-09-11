@@ -6,7 +6,7 @@
   justify-content: space-around;
 }
 .main-manu__search {
-  width: 100%;
+  width: 75%;
   padding: 10px 12px;
   border-radius: 27px;
   font-size: 15px;
@@ -16,6 +16,7 @@
   flex: (1, 0, auto);
 }
 .main-menu__logo{
+  padding: 5px;
   width: 42px;
   height: 40px;
   object-fit: cover;
@@ -24,15 +25,14 @@
   left: -7px;
 }
 .main-menu__list{
-  width: 42%;
-  max-width: 125px;
+  width: 15%;
   height: 40px;
   border-radius: 27px;
   background-color: white;
   color: black;
-  font-weight: 400;
+  font-size: 1rem;
   border: 1px solid white;
-  margin-left: 10px;
+  padding: 5px;
 }
 .main-menu__list:hover{
   background-color: black;
@@ -44,7 +44,7 @@
   width: 300px !important;
   position: absolute !important;
   top:67px !important;
-  right: 0 !important;
+  right: 28px !important;
 }
 .desk{
   box-shadow: 0 5px 19px 8px rgba(72, 92, 107, 0.17);
@@ -59,55 +59,55 @@
   right: 0;
   z-index: 6;
   background-color:white;
+  padding: 10px 15px;
 }
 .wrapper__item{
   width: 100%;
-  margin: 8px 0;
-  padding-left: 5px;
+  padding: 7px 5px;
   display:flex;
 }
 .desk-item__input-true{
   width: 90%;
-  padding: 2px 0px 2px 13px;
+  padding: 2px 0 2px 13px;
   border-radius: 22px;
   margin:0 auto;
   border:none;
   color: #343434;
+  font-size: 1rem;
 }
 .desk__btn-edit_item,
 .desk__btn-delete_item,
 .desk__btn-save_item,
 .desk__btn-cancel_item{
-  width: 48px;
-  padding: 1px; 
+  width: 57px;
+  padding: 1px 2px;
   background-color: white;
   color: black;
   border: 2px solid #343434;
   border-radius: 20px;
   margin: 0 3px;
   text-align: center;
-  font-size: 12px;
+  font-size: 1rem;
 }
 .desk__btn-edit_item,
 .desk__btn-save_item{
-  width: 40px;
+  width: 42px;
 }
 .wrapper__down{
-  width: 97%;
+  width: 100%;
   display: flex;
-  margin: 10px 5px;
+  padding: 5px;
 }
 .wrapper__up{
   padding: 2px;
 }
 .desk__input{
-  padding: 8px;
-  background-color: #b7b7b7;
-  width: 45%;
-  margin-left: 3px;
-  margin-right: 6px;
+  width: 55%;
+  padding: 4px 9px;
+  background-color: #d6d4d4;
   border-radius: 15px;
   border: none;
+  font-size: 1rem;
 }
 .desk__btn_add{
   padding: 8px;
@@ -116,21 +116,24 @@
   background-color: #e4e4e4;
   width: 100%;
   text-align: center;
+  font-size: 1rem;
 }
 .desk__btn_save, .desk__btn_cansel{
   border: none;
   border-radius: 22px;;
   background-color: #e4e4e4;
   width: 23%;
-  margin: 0 5px 0 5px;
+  padding: 4px 5px 3px 4px;
+  font-size: 1rem;
+  margin: 0 3px;
 }
 .desk-item__input-false{
   border-radius: 15px;
-   border:none;
-   width: 55%;
-   margin-right: 10px;
-  padding-left: 13px;
+  border:none;
+  width: 55%;
+  padding: 3px 4px 3px 6px;
   color: #343434;
+  font-size: 1rem;
  }
 .desk__btn-edit_item:hover,
 .desk__btn-save_item:hover,
