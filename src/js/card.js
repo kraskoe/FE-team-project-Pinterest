@@ -1,3 +1,6 @@
+//import { buildComplaintCard } from "./card?";
+//import { buildDeskMenu } from "./card??";
+
 // const card = {
 //   id: "1",
 //   imgUrl: "../images/img-1.jpg",
@@ -44,10 +47,10 @@ function buildInterestCard(card) {
   saveBtn.innerHTML = `save`;
 
   reportBtn.classList.add("card__img-add");
-  reportBtn.innerHTML = `<i class="fa-solid fa-triangle-exclamation fa-2x"></i>`;
+  reportBtn.innerHTML = `report`;
 
   hideBtn.classList.add("card__img-hide");
-  hideBtn.innerHTML = `<i class="fa-solid fa-upload fa-2x"></i>`;
+  hideBtn.innerHTML = `hide`;
   //////////////
 
   photo.append(img, saveBtn, reportBtn, hideBtn);
@@ -57,4 +60,32 @@ function buildInterestCard(card) {
   return element;
 }
 
+/*
+reportBtn.addEventListener("click", sendComplain);
+function sendComplain(e) {
+  const id = e.closest(".card").id;
+  buildComplaintCard(id);
+}
+
+hideBtn.addEventListener("click", hidePin);
+
+function hidePin(e) {
+  const card = e.closest(".card");
+  const id = card.dataset.id;
+  let items = getHiddenpins();
+  items.push(card); //??? input
+  setHiddenPins(items);
+  element.classList.add("blur");
+}
+
+saveBtn.addEventListener("click", savePin);
+
+function savePin(e) {
+  const card = e.closest(".card");
+  const id = card.dataset.id;
+  buildDeskMenu(id);
+}
+ */
+
+//export { buildInterestCard, sendComplain, hidePin, savePin};
 export { buildInterestCard };
