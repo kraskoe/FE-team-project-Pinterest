@@ -27,6 +27,4 @@ function initApp() {
 			root.append(buildMainMenu());
 			root.append(buildMainArea());
 		})
-
 }
-

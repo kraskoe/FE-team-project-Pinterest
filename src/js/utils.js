@@ -1,23 +1,27 @@
 import { v4 as uuidv4 } from 'uuid';
 
 function getHiddenPins() {
-  return localStorage.getItem("hidden")
-    ? JSON.parse(localStorage.getItem("hidden"))
-    : [];
+  if (!localStorage.getItem("hidden")) {
+    setHiddenPins([]);
+  }
+  return JSON.parse(localStorage.getItem("hidden"));
 }
+
 function setHiddenPins(array) {
   localStorage.setItem("hidden", JSON.stringify(array));
 }
 
 function getDesks() {
-  return localStorage.getItem("desks")
-    ? JSON.parse(localStorage.getItem("desks"))
-    : [
-        { id: uuidv4(), name: "Desk 1", cards: [] },
-        { id: uuidv4(), name: "Desk 2", cards: [] },
-        { id: uuidv4(), name: "Desk 3", cards: [] },
-      ];
+  if (!localStorage.getItem("desks")) {
+    setDesks([
+      { id: uuidv4(), name: "Desk 1", cards: [] },
+      { id: uuidv4(), name: "Desk 2", cards: [] },
+      { id: uuidv4(), name: "Desk 3", cards: [] },
+    ])
+  }
+  return JSON.parse(localStorage.getItem("desks"));
 }
+
 function setDesks(array) {
   localStorage.setItem("desks", JSON.stringify(array));
 }
