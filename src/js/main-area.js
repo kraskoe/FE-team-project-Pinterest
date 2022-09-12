@@ -19,6 +19,7 @@ function handleCards(mainArea) {
     let cards = getCards();
     const hidden = getHiddenPins();
     const deskID = mainArea.dataset.deskId;
+    const search = document.querySelector('.main-manu__search');
     hidden.forEach(el => {cards.filter(card => card.id !== el)});
     if (deskID) {
         const deskCards = getDesks().find(desk => desk.id = deskID);
@@ -30,6 +31,9 @@ function handleCards(mainArea) {
             }
             cards = tempArr;
         })
+    }
+    if (search.value.length >= 3) {
+        cards.filter(card => card.desc.toLowerCase().includes(search.value.toLowerCase()));
     }
     return cards;
 }
