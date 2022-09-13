@@ -1,6 +1,12 @@
 import {getDesks, setDesks} from "./utils";
 import {buildMainArea} from "./main-area";
+import {v4 as uuidv4} from "uuid";
 
+function Desk(name) {
+    this.id = uuidv4()
+    this.name = name
+    this.cards = []
+}
 function buildMainMenu() {
     const menuSection = document.createElement('section');
     const menuLogo = document.createElement('img');
@@ -21,7 +27,7 @@ function buildMainMenu() {
     menuList.classList.add("main-menu__list");
     menuList.textContent = 'Выбрать доску';
 
-    let deskScreen = buildDeskMenu(0);
+    let deskScreen = buildDeskMenu(1);
     deskScreen.style.display = 'none';
 
     menuSection.append(deskScreen);
@@ -32,7 +38,6 @@ function buildMainMenu() {
     menuList.addEventListener('click',function () {
         deskScreen.style.display = 'block';
     })
-
     return menuSection;
     }
 
@@ -60,6 +65,7 @@ function  buildDeskMenu(mode) {
         addBtnDesk = document.createElement('button');
         saveBtnDesk = document.createElement('button');
         canselBtnDesk = document.createElement('button');
+        inputDesk.setAttribute('type', 'text');
 
         deskScreen.classList.add('false');
         wrapperDown.classList.add('wrapper__down');
@@ -85,8 +91,30 @@ function  buildDeskMenu(mode) {
             inputDesk.style.display = 'block';
             addBtnDesk.style.display = 'none';
          })
+        saveBtnDesk.addEventListener('click', function () {
+          if(inputDesk.value !== '') {
+              const array = getDesks();
+              array.push(new Desk(inputDesk.value));
+              setDesks(array);
+              itemWrapperUp.append(buildItemDesk(1,  Desk.id, inputDesk.value));
+
+              inputDesk.value = '';
+              canselBtnDesk.style.display = 'none';
+              saveBtnDesk.style.display = 'none';
+              inputDesk.style.display = 'none';
+              addBtnDesk.style.display = 'block';
+          }else {
+              inputDesk.placeholder = 'Введите текст';
+          }
+        })
+        canselBtnDesk.addEventListener('click',function () {
+            inputDesk.value = '';
+            canselBtnDesk.style.display = 'none';
+            saveBtnDesk.style.display = 'none';
+            inputDesk.style.display = 'none';
+            addBtnDesk.style.display = 'block';
+        })
     }
-    
     return deskScreen;
 }
 
@@ -126,7 +154,6 @@ function buildItemDesk(mode, id, name) {
         saveBtnItem.textContent = 'Save';
         cancelBtnItem.textContent = 'Cancel';
         deleteBtnItem.textContent = 'Delete';
-        deleteBtnItem.dataset.id = id;
 
         saveBtnItem.style.display = "none";
         cancelBtnItem.style.display = "none";
@@ -140,8 +167,47 @@ function buildItemDesk(mode, id, name) {
             cancelBtnItem.style.display = "block";
             itemDesk.readOnly = false;
         })
+
+        cancelBtnItem.addEventListener('click', function () {
+           const array = getDesks();
+           const cardId = wrapperItem.firstElementChild.dataset.id;
+            itemDesk.value = array.find(item => item.id === cardId).name;
+            editBtnItem.style.display = "block";
+            deleteBtnItem.style.display = "block";
+            saveBtnItem.style.display = "none";
+            cancelBtnItem.style.display = "none";
+            itemDesk.readOnly = true;
+        })
+
+        deleteBtnItem.addEventListener('click',function () {
+            const array = getDesks();
+            const cardId = wrapperItem.firstElementChild.dataset.id;
+            const deskIndex = array.findIndex(item => item.id === cardId);
+            array.splice(deskIndex, 1);
+            setDesks(array);
+            wrapperItem.remove();
+            buildDeskMenu(1);
+        })
+
+        saveBtnItem.addEventListener('click', function () {
+           if (itemDesk.value !== ''){
+                const array = getDesks();
+                const cardId = wrapperItem.firstElementChild.dataset.id;
+               const deskItem = array.find(item => item.id === cardId);
+               deskItem.name = itemDesk.value;
+                setDesks(array);
+                editBtnItem.style.display = "block";
+                deleteBtnItem.style.display = "block";
+                saveBtnItem.style.display = "none";
+                cancelBtnItem.style.display = "none";
+                itemDesk.readOnly = true;
+            } else itemDesk.placeholder = 'Введите текст';
+        })
     }
+    wrapperItem.addEventListener('click', function () {
+        let deskId = wrapperItem.firstElementChild.dataset.id;
+        buildMainArea(deskId);
+    })
     return wrapperItem;
 }
-
 export {buildMainMenu, buildDeskMenu};
