@@ -1,18 +1,20 @@
 //import { buildComplaintCard } from "./card?";
-//import { buildDeskMenu } from "./card??";
+import { buildDeskMenu } from "./main-menu";
 
-// const card = {
-//   id: "1",
-//   imgUrl: "../images/img-1.jpg",
-//   desc: "Hashtag it is my first card",
-//   avatarUrl: "../images/img-1.jpg",
-//   userName: "UserName",
-// };
+import {
+  getCards,
+  getDesks,
+  getHiddenPins,
+  getPromiseCards,
+  setCards,
+  setDesks,
+  setHiddenPins,
+} from "./utils";
+import { buildComplainWindow } from "./complain";
+import { v4 as uuidv4 } from "uuid";
+import { buildMainArea } from "./main-area";
+import { assertRootMode } from "@babel/core/lib/config/validation/option-assertions";
 
-//checking
-// const container = document.getElementById("root");
-// container.append(buildInterestCard(card));
-//
 function buildInterestCard(card) {
   const element = document.createElement("div");
   const img = document.createElement("img");
@@ -57,35 +59,54 @@ function buildInterestCard(card) {
 
   user.append(ava, userName);
   element.append(photo, user);
+
+  hideBtn.addEventListener("click", hidePin);
+  saveBtn.addEventListener("click", savePin);
+  reportBtn.addEventListener("click", sendComplain);
+
   return element;
 }
 
-/*
-reportBtn.addEventListener("click", sendComplain);
 function sendComplain(e) {
-  const id = e.closest(".card").id;
-  buildComplaintCard(id);
-}
+  const card = e.target.closest(".card");
+  const complaintWindow = buildComplainWindow(card.dataset.id);
+  card.appendChild(complaintWindow);
 
-hideBtn.addEventListener("click", hidePin);
+  // const id = e.currentTarget.closest(".card").id;
+  // buildComplaintCard(id);
+}
 
 function hidePin(e) {
-  const card = e.closest(".card");
+  const card = e.target.closest(".card");
   const id = card.dataset.id;
-  let items = getHiddenpins();
-  items.push(card); //??? input
+  let items = getHiddenPins();
+  items.push(card.dataset.id);
   setHiddenPins(items);
-  element.classList.add("blur");
+  const content = document.getElementById("main-area");
+  content.remove();
+  document.getElementById("root").appendChild(buildMainArea());
+  //buildMainArea();
+  //card.classList.add("blur");
 }
-
-saveBtn.addEventListener("click", savePin);
 
 function savePin(e) {
-  const card = e.closest(".card");
-  const id = card.dataset.id;
-  buildDeskMenu(id);
+  const card = e.target.closest(".card");
+  const deskMenu = buildDeskMenu();
+  card.appendChild(deskMenu);
+  deskMenu.addEventListener("click", function (e) {
+    const element = e.target;
+    if (element.classList.contains("wrapper__item")) {
+      const id = element.dataset.id;
+      const deskMenuItems = getDesks();
+      deskMenuItems.forEach((item) => {
+        if (item.id === id) {
+          let array = item.card;
+          array.push(card.dataset.id);
+        }
+      });
+    }
+    card.removeChild(deskMenu);
+  });
 }
- */
 
-//export { buildInterestCard, sendComplain, hidePin, savePin};
 export { buildInterestCard };
