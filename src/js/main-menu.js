@@ -2,8 +2,8 @@ import {getDesks, setDesks} from "./utils";
 import {buildMainArea} from "./main-area";
 import {v4 as uuidv4} from "uuid";
 
-function Desk(name) {
-    this.id = uuidv4()
+function Desk(id, name) {
+    this.id = id
     this.name = name
     this.cards = []
 }
@@ -29,10 +29,8 @@ function buildMainMenu() {
 
     let deskScreen = buildDeskMenu(1);
 
-
     menuSection.append(deskScreen);
     menuSection.append(menuLogo, menuInput, menuList);
-
     root.append(menuSection);
 
     menuList.addEventListener('click',function () {
@@ -101,10 +99,10 @@ function  buildDeskMenu(mode) {
         saveBtnDesk.addEventListener('click', function () {
           if(inputDesk.value !== '') {
               const array = getDesks();
-              array.push(new Desk(inputDesk.value));
+              array.push(new Desk(uuidv4(),inputDesk.value));
               setDesks(array);
-              itemWrapperUp.append(buildItemDesk(1, Desk.id, inputDesk.value));
-
+              itemWrapperUp.append(buildItemDesk(1, uuidv4(), inputDesk.value));
+              array.forEach(item => console.log(item));
               inputDesk.value = '';
               canselBtnDesk.style.display = 'none';
               saveBtnDesk.style.display = 'none';
@@ -215,6 +213,7 @@ function buildItemDesk(mode, id, name) {
         let deskId = wrapperItem.dataset.id;
         const content = document.getElementById("main-area");
         content.remove();
+
         document.getElementById("root").append(buildMainArea(deskId));
     })
     return wrapperItem;
