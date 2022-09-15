@@ -24,6 +24,9 @@
   top: 0;
   left: -7px;
 }
+.main-menu__logo:hover{
+  cursor: pointer;
+}
 .main-menu__list{
   width: 15%;
   height: 40px;
@@ -48,18 +51,19 @@
 }
 .desk{
   box-shadow: 0 5px 19px 8px rgba(72, 92, 107, 0.17);
-  width: 215px;
+  width: 239px;
   min-height: 40px;
   border: 2px solid white;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top:243px;
-  right: 0;
+  top: 231px;
+  right: 51px;
   z-index: 6;
   background-color:white;
   padding: 10px 15px;
+  display: none;
 }
 .wrapper__item{
   width: 100%;
@@ -79,11 +83,11 @@
 .desk__btn-delete_item,
 .desk__btn-save_item,
 .desk__btn-cancel_item{
-  width: 57px;
-  padding: 1px 2px;
+  width: 67px;
+  padding: 7px 2px;
   background-color: white;
   color: black;
-  border: 2px solid #343434;
+  border: none;
   border-radius: 20px;
   margin: 0 3px;
   text-align: center;
@@ -91,7 +95,7 @@
 }
 .desk__btn-edit_item,
 .desk__btn-save_item{
-  width: 42px;
+  width: 53px;
 }
 .wrapper__down{
   width: 100%;
@@ -130,7 +134,8 @@
 .desk-item__input-false{
   border-radius: 15px;
   border:none;
-  width: 55%;
+  max-width: 130px;
+  flex: 1 1 auto;
   padding: 3px 4px 3px 6px;
   color: #343434;
   font-size: 1rem;
@@ -140,7 +145,6 @@
 .desk__btn-cancel_item:hover,
 .desk__btn-delete_item:hover {
   background-color: black;
-  border: 1px solid black;
   color: white;
   cursor: pointer;
 }
@@ -150,4 +154,7 @@
   background-color: rgb(190, 17, 0);
   color: whitesmoke;
   cursor: pointer;
+}
+.active{
+  display: block!important;
 }
