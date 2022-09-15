@@ -100,7 +100,7 @@ function savePin(e) {
       const deskMenuItems = getDesks();
       deskMenuItems.forEach((item) => {
         if (item.id === id) {
-          let array = item.card;
+          let array = item.cards;
           array.push(card.dataset.id);
         }
       });
