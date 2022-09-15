@@ -12,7 +12,7 @@ function buildMainMenu() {
     const menuLogo = document.createElement('img');
     const menuInput = document.createElement('input');
     const menuList = document.createElement('button');
-    const root = document.getElementById('root')
+    const root = document.getElementById('root');
 
     menuSection.id = "main-menu";
 
@@ -28,7 +28,7 @@ function buildMainMenu() {
     menuList.textContent = 'Выбрать доску';
 
     let deskScreen = buildDeskMenu(1);
-    deskScreen.style.display = 'none';
+
 
     menuSection.append(deskScreen);
     menuSection.append(menuLogo, menuInput, menuList);
@@ -36,8 +36,14 @@ function buildMainMenu() {
     root.append(menuSection);
 
     menuList.addEventListener('click',function () {
-        deskScreen.style.display = 'block';
+        deskScreen.classList.toggle('active');
     })
+    menuLogo.addEventListener('click',function () {
+        const content = document.getElementById("main-area");
+        content.remove();
+        document.getElementById('root').append(buildMainArea());
+    })
+
     return menuSection;
     }
 
@@ -46,6 +52,7 @@ function  buildDeskMenu(mode) {
     let deskScreen = document.createElement('div');
     let itemWrapperUp = document.createElement('div');
     itemWrapperUp.classList.add('wrapper__up');
+    deskScreen.id = 'desk';
 
     let inputDesk;
     let addBtnDesk;
@@ -96,7 +103,7 @@ function  buildDeskMenu(mode) {
               const array = getDesks();
               array.push(new Desk(inputDesk.value));
               setDesks(array);
-              itemWrapperUp.append(buildItemDesk(1,  Desk.id, inputDesk.value));
+              itemWrapperUp.append(buildItemDesk(1, Desk.id, inputDesk.value));
 
               inputDesk.value = '';
               canselBtnDesk.style.display = 'none';
@@ -131,7 +138,7 @@ function buildItemDesk(mode, id, name) {
     wrapperItem.classList.add('wrapper__item');
     itemDesk.setAttribute('value', `${name}`);
     itemDesk.setAttribute('type', 'text');
-    itemDesk.dataset.id = id;
+    wrapperItem.dataset.id = id;
     itemDesk.readOnly = true;
 
     wrapperItem.append(itemDesk);
@@ -170,7 +177,7 @@ function buildItemDesk(mode, id, name) {
 
         cancelBtnItem.addEventListener('click', function () {
            const array = getDesks();
-           const cardId = wrapperItem.firstElementChild.dataset.id;
+           const cardId = wrapperItem.dataset.id;
             itemDesk.value = array.find(item => item.id === cardId).name;
             editBtnItem.style.display = "block";
             deleteBtnItem.style.display = "block";
@@ -181,7 +188,7 @@ function buildItemDesk(mode, id, name) {
 
         deleteBtnItem.addEventListener('click',function () {
             const array = getDesks();
-            const cardId = wrapperItem.firstElementChild.dataset.id;
+            const cardId = wrapperItem.dataset.id;
             const deskIndex = array.findIndex(item => item.id === cardId);
             array.splice(deskIndex, 1);
             setDesks(array);
@@ -192,7 +199,7 @@ function buildItemDesk(mode, id, name) {
         saveBtnItem.addEventListener('click', function () {
            if (itemDesk.value !== ''){
                 const array = getDesks();
-                const cardId = wrapperItem.firstElementChild.dataset.id;
+                const cardId = wrapperItem.dataset.id;
                const deskItem = array.find(item => item.id === cardId);
                deskItem.name = itemDesk.value;
                 setDesks(array);
@@ -204,9 +211,11 @@ function buildItemDesk(mode, id, name) {
             } else itemDesk.placeholder = 'Введите текст';
         })
     }
-    wrapperItem.addEventListener('click', function () {
-        let deskId = wrapperItem.firstElementChild.dataset.id;
-        buildMainArea(deskId);
+    itemDesk.addEventListener('click', function () {
+        let deskId = wrapperItem.dataset.id;
+        const content = document.getElementById("main-area");
+        content.remove();
+        document.getElementById("root").append(buildMainArea(deskId));
     })
     return wrapperItem;
 }
