@@ -71,6 +71,9 @@ function sendComplain(e) {
   const card = e.target.closest(".card");
   const complaintWindow = buildComplainWindow(card.dataset.id);
   card.appendChild(complaintWindow);
+
+  // const id = e.currentTarget.closest(".card").id;
+  // buildComplaintCard(id);
 }
 
 function hidePin(e) {
@@ -82,6 +85,8 @@ function hidePin(e) {
   const content = document.getElementById("main-area");
   content.remove();
   document.getElementById("root").appendChild(buildMainArea());
+  //buildMainArea();
+  //card.classList.add("blur");
 }
 
 function savePin(e) {
@@ -90,14 +95,26 @@ function savePin(e) {
   console.log(photo);
   const deskMenu = buildDeskMenu();
   deskMenu.classList.add("visiable");
+  // photo.disabled = true;
+  // photo.classList.add("disable");
+  console.log(deskMenu);
+  console.log(card);
   card.append(deskMenu);
+  console.log(card);
 
+  // window.addEventListener("click", function (e) {
+  //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
+  // });
 
   deskMenu.addEventListener("click", function (e) {
     const element = e.target.closest(".wrapper__item");
+    console.log(element);
+
     if (element.classList.contains("wrapper__item")) {
       const id = element.dataset.id;
+      console.log(id);
       const deskMenuItems = getDesks();
+      console.log(deskMenuItems);
       deskMenuItems.forEach((item) => {
         if (item.id === id) {
           let array = item.cards;
@@ -106,7 +123,11 @@ function savePin(e) {
         }
       });
     }
-    card.removeChild(deskMenu);
+    // window.addEventListener("click", function (e) {
+    //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
+    // });
+    // deskMenu.classList.remove("visiable");
+    //card.remove(deskMenu);
   });
 }
 
