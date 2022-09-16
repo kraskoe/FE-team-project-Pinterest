@@ -91,21 +91,43 @@ function hidePin(e) {
 
 function savePin(e) {
   const card = e.target.closest(".card");
+  const photo = card.firstElementChild;
+  console.log(photo);
   const deskMenu = buildDeskMenu();
-  card.appendChild(deskMenu);
+  deskMenu.classList.add("visiable");
+  // photo.disabled = true;
+  // photo.classList.add("disable");
+  console.log(deskMenu);
+  console.log(card);
+  card.append(deskMenu);
+  console.log(card);
+
+  // window.addEventListener("click", function (e) {
+  //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
+  // });
+
   deskMenu.addEventListener("click", function (e) {
-    const element = e.target;
+    const element = e.target.closest(".wrapper__item");
+    console.log(element);
+
     if (element.classList.contains("wrapper__item")) {
       const id = element.dataset.id;
+      console.log(id);
       const deskMenuItems = getDesks();
+      console.log(deskMenuItems);
       deskMenuItems.forEach((item) => {
         if (item.id === id) {
           let array = item.cards;
           array.push(card.dataset.id);
+          setDesks(deskMenuItems);
         }
       });
     }
-    card.removeChild(deskMenu);
+    // window.addEventListener("click", function (e) {
+    //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
+    // });
+    // deskMenu.classList.remove("visiable");
+    //card.remove(deskMenu);
   });
 }
 
