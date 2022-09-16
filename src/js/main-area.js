@@ -20,7 +20,9 @@ function handleCards(mainArea) {
     const hidden = getHiddenPins();
     const deskID = mainArea.dataset.deskId;
     const search = document.querySelector('.main-manu__search');
-    hidden.forEach(el => {cards.filter(card => card.id !== el)});
+    
+    hidden.forEach(el => {cards = cards.filter(card => card.id != el)});
+
     if (deskID) {
         const deskCards = getDesks().find(desk => desk.id = deskID);
         const tempArr = [];
