@@ -1,0 +1,16 @@
+#main-area {
+  background-color: white;
+  padding: 3rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+  justify-content: center ;
+}
+
+.columnMainArea__class {
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+}
+
+
