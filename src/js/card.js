@@ -85,8 +85,6 @@ function hidePin(e) {
   const content = document.getElementById("main-area");
   content.remove();
   document.getElementById("root").appendChild(buildMainArea());
-  //buildMainArea();
-  //card.classList.add("blur");
 }
 
 function savePin(e) {
@@ -95,16 +93,7 @@ function savePin(e) {
   console.log(photo);
   const deskMenu = buildDeskMenu();
   deskMenu.classList.add("visiable");
-  // photo.disabled = true;
-  // photo.classList.add("disable");
-  console.log(deskMenu);
-  console.log(card);
   card.append(deskMenu);
-  console.log(card);
-
-  // window.addEventListener("click", function (e) {
-  //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
-  // });
 
   deskMenu.addEventListener("click", function (e) {
     const element = e.target.closest(".wrapper__item");
@@ -123,11 +112,6 @@ function savePin(e) {
         }
       });
     }
-    // window.addEventListener("click", function (e) {
-    //   if (e.target !== deskMenu) deskMenu.classList.remove("visiable");
-    // });
-    // deskMenu.classList.remove("visiable");
-    //card.remove(deskMenu);
   });
 }
 
