@@ -49,21 +49,28 @@
   top:67px !important;
   right: 28px !important;
 }
-.desk{
+.desk,
+.desk_card {
   box-shadow: 0 5px 19px 8px rgba(72, 92, 107, 0.17);
   width: 239px;
   min-height: 40px;
   border: 2px solid white;
   border-radius: 25px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 231px;
-  right: 51px;
   z-index: 6;
   background-color:white;
   padding: 10px 15px;
+
+}
+.desk {
   display: none;
+  position: absolute;
+  top: 231px;
+  right: 51px;
+}
+.desk_card {
+  position: absolute;
+  top: 80px;
+  right: 15px;
 }
 .wrapper__item{
   width: 100%;

@@ -28,7 +28,7 @@ function buildMainMenu() {
     menuList.textContent = 'Выбрать доску';
 
     let deskScreen = buildDeskMenu(1);
-
+    deskScreen.id = 'desk';
 
     menuSection.append(deskScreen);
     menuSection.append(menuLogo, menuInput, menuList);
@@ -52,7 +52,6 @@ function  buildDeskMenu(mode) {
     let deskScreen = document.createElement('div');
     let itemWrapperUp = document.createElement('div');
     itemWrapperUp.classList.add('wrapper__up');
-    deskScreen.id = 'desk';
 
     let inputDesk;
     let addBtnDesk;
@@ -61,12 +60,11 @@ function  buildDeskMenu(mode) {
     let wrapperDown;
 
     const arrayDesk = getDesks();
-    deskScreen.classList.add('desk');
     arrayDesk.forEach(item =>  itemWrapperUp.append(buildItemDesk(mode, item.id, item.name)));
     deskScreen.append(itemWrapperUp);
 
     if (mode === 1){
-
+        deskScreen.classList.add('desk');
         wrapperDown = document.createElement('div');
         inputDesk = document.createElement('input');
         addBtnDesk = document.createElement('button');
@@ -121,7 +119,7 @@ function  buildDeskMenu(mode) {
             inputDesk.style.display = 'none';
             addBtnDesk.style.display = 'block';
         })
-    }
+    } else     deskScreen.classList.add('desk_card');
     return deskScreen;
 }
 
@@ -213,17 +211,30 @@ function buildItemDesk(mode, id, name) {
     }
 
     if (mode === 1) {
-        itemDesk.addEventListener('click', rebuildMainAreaDesk)
-    }
+        itemDesk.addEventListener('click', rebuildMainAreaDesk);
+    } else  itemDesk.addEventListener('click', saveCard);
 
     return wrapperItem;
 }
 
 function rebuildMainAreaDesk(event) {
     let deskId = event.target.closest('.wrapper__item').dataset.id;
+    const deskScreen = document.getElementById('desk');
     const content = document.getElementById("main-area");
     content.remove();
     document.getElementById("root").append(buildMainArea(deskId));
+    deskScreen.classList.toggle('active');
+}
+
+function saveCard(event) {
+    let cardID = event.target.closest('.card').dataset.id;
+    let deskID = event.target.closest('.wrapper__item').dataset.id;
+    let menu = event.target.closest('.wrapper__item');
+    let desks = getDesks();
+    let desk = desks.find(el => el.id === deskID);
+    desk.cards.push(cardID);
+    setDesks(desks);
+    menu.remove();
 }
 
 export {buildMainMenu, buildDeskMenu};

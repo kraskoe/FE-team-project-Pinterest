@@ -26,7 +26,7 @@ function handleCards(mainArea) {
         const deskCards = getDesks().find(desk => desk.id == deskID).cards;
         const tempArr = [];
         deskCards.forEach(el => {
-            let card = cards.find(obj => obj.id === el);
+            let card = cards.find(obj => obj.id == el);
             if (card) {
                 tempArr .push(card);
             }
