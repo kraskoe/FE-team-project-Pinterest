@@ -4,9 +4,8 @@ import {buildInterestCard} from "./card";
 function buildMainArea(deskId) {
     const mainArea = document.createElement('section');
     mainArea.id = 'main-area';
-    const cards = handleCards(mainArea);
-
     if (deskId) mainArea.dataset.deskId = deskId;
+    const cards = handleCards(mainArea);
 
     fillArea(mainArea, cards);
 
@@ -24,15 +23,15 @@ function handleCards(mainArea) {
     hidden.forEach(el => {cards = cards.filter(card => card.id != el)});
 
     if (deskID) {
-        const deskCards = getDesks().find(desk => desk.id = deskID);
+        const deskCards = getDesks().find(desk => desk.id == deskID).cards;
         const tempArr = [];
         deskCards.forEach(el => {
             let card = cards.find(obj => obj.id === el);
             if (card) {
                 tempArr .push(card);
             }
-            cards = tempArr;
         })
+        cards = tempArr;
     }
     if (search.value.length >= 3) {
         cards.filter(card => card.desc.toLowerCase().includes(search.value.toLowerCase()));

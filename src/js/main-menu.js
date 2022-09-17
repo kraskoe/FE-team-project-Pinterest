@@ -211,12 +211,19 @@ function buildItemDesk(mode, id, name) {
             } else itemDesk.placeholder = 'Введите текст';
         })
     }
-    itemDesk.addEventListener('click', function () {
-        let deskId = wrapperItem.dataset.id;
-        const content = document.getElementById("main-area");
-        content.remove();
-        document.getElementById("root").append(buildMainArea(deskId));
-    })
+
+    if (mode === 1) {
+        itemDesk.addEventListener('click', rebuildMainAreaDesk)
+    }
+
     return wrapperItem;
 }
+
+function rebuildMainAreaDesk(event) {
+    let deskId = event.target.closest('.wrapper__item').dataset.id;
+    const content = document.getElementById("main-area");
+    content.remove();
+    document.getElementById("root").append(buildMainArea(deskId));
+}
+
 export {buildMainMenu, buildDeskMenu};

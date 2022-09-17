@@ -3,6 +3,7 @@ import {buildInterestCard} from "./card";
 import {buildMainArea} from "./main-area"
 import {buildMainMenu, buildDeskMenu} from "./main-menu";
 import {getCards, getDesks, getHiddenPins, getPromiseCards, setCards, setDesks, setHiddenPins} from "./utils";
+import {buildComplainWindow} from "./complain";
 
 //импорт изображений
 // import image from './assets/image.jpg';

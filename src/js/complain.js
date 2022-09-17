@@ -121,8 +121,6 @@ function buildComplainWindow(pinId) {
     return wrapper
 }
 
-document.body.append(buildComplainWindow())
-
 function sendData(cardId, radioButtons) {
     const checkedButton = radioButtons.find((value, index, obj) => { return value.checked })
     console.log(`{\n    "Id": "${cardId}",\n    "reason": "${checkedButton['id']}"\n}`)
