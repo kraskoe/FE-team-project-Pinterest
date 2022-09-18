@@ -1,5 +1,5 @@
 //import { buildComplaintCard } from "./card?";
-import { buildDeskMenu } from "./main-menu";
+import { buildDeskMenu, buildMainMenu } from "./main-menu";
 
 import {
   getCards,
@@ -85,34 +85,93 @@ function hidePin(e) {
   const content = document.getElementById("main-area");
   content.remove();
   document.getElementById("root").appendChild(buildMainArea());
+  //buildMainArea();
+  //card.classList.add("blur");
 }
-
+let flag = true;
 function savePin(e) {
+  /*
+  saveBtn.classList.add("disable");
+  document.getElementsByClassName("card__img-save").add.classList("disabled");
+  
+  card.disabled = true;
+  document.getElementsByClassName("card__img-save").disabled = true;
+  console.log(document.getElementsByClassName("card__img-save"));
+
+  const body = document.getElementById("root");
+  body.classList.add("background");
+
+  */
+
+  const button = e.target;
+  // button.disabled = true;
   const card = e.target.closest(".card");
-  const photo = card.firstElementChild;
-  console.log(photo);
   const deskMenu = buildDeskMenu();
-  deskMenu.classList.add("visiable");
-  card.append(deskMenu);
+  if (flag) {
+    card.appendChild(deskMenu);
+    flag = false;
+    console.log("if", flag);
+  } else {
+    console.log(card);
+    flag = true;
+    console.log("else", flag);
+    console.log(deskMenu);
+    console.log();
+    card.removeChild(card.lastChild);
+  }
+
+  // window.addEventListener("click", (e) => {
+  //   let hero = document.getElementById("root");
+  //   hero.classList.add("background");
+  //   console.log(hero);
+  //   console.log(e.target);
+
+  // if (e.target !== deskMenu) {
+  //   card.removeChild(deskMenu);
+  //   console.log(hero);
+  // }
+  // });
 
   deskMenu.addEventListener("click", function (e) {
-    const element = e.target.closest(".wrapper__item");
-    console.log(element);
-
+    const element = e.target;
+    console.log(e.target);
     if (element.classList.contains("wrapper__item")) {
       const id = element.dataset.id;
-      console.log(id);
       const deskMenuItems = getDesks();
-      console.log(deskMenuItems);
       deskMenuItems.forEach((item) => {
         if (item.id === id) {
           let array = item.cards;
           array.push(card.dataset.id);
-          setDesks(deskMenuItems);
         }
       });
     }
+    card.removeChild(deskMenu);
+    flag = true;
+    button.disabled = false;
   });
+
+  console.log("saveButton");
+}
+
+// const input = document.querySelector(".main-manu__search");
+const input = buildMainMenu();
+console.log(input);
+
+input.addEventListener("input", search);
+
+function search(e) {
+  console.log(e.target.value);
+  let array = getCards();
+  let searchArray = [];
+  console.log(array);
+
+  array.forEach((item) => console.log(typeof item.desc));
+  array.forEach((card) => {
+    if (card.desc.includes(e.target.value)) searchArray.push(card);
+  });
+  console.log(searchArray);
+  setDesks(searchArray)
+  buildMainArea(searchArray);
 }
 
 export { buildInterestCard };
