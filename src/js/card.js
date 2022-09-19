@@ -1,5 +1,5 @@
 //import { buildComplaintCard } from "./card?";
-import { buildDeskMenu, buildMainMenu } from "./main-menu";
+import { buildDeskMenu } from "./main-menu";
 
 import {
   getCards,
@@ -25,6 +25,7 @@ function buildInterestCard(card) {
   const reportBtn = document.createElement("button");
   const hideBtn = document.createElement("button");
   const photo = document.createElement("div");
+  const desc = document.createElement("div");
 
   element.dataset.id = card.id;
 
@@ -42,6 +43,9 @@ function buildInterestCard(card) {
   userName.classList.add("card__user-name");
   userName.innerHTML = card.userName;
 
+  desc.classList.add("card__desc");
+  desc.innerHTML = card.desc;
+
   user.classList.add("card__user");
 
   //on hover
@@ -58,11 +62,12 @@ function buildInterestCard(card) {
   photo.append(img, saveBtn, reportBtn, hideBtn);
 
   user.append(ava, userName);
-  element.append(photo, user);
+  element.append(photo, user, desc);
 
   hideBtn.addEventListener("click", hidePin);
   saveBtn.addEventListener("click", savePin);
   reportBtn.addEventListener("click", sendComplain);
+  element.addEventListener("click", popUp);
 
   return element;
 }
@@ -71,9 +76,7 @@ function sendComplain(e) {
   const card = e.target.closest(".card");
   const complaintWindow = buildComplainWindow(card.dataset.id);
   card.appendChild(complaintWindow);
-
-  // const id = e.currentTarget.closest(".card").id;
-  // buildComplaintCard(id);
+  document.body.style.overflow = "hidden";
 }
 
 function hidePin(e) {
@@ -88,90 +91,82 @@ function hidePin(e) {
   //buildMainArea();
   //card.classList.add("blur");
 }
-let flag = true;
+
 function savePin(e) {
-  /*
-  saveBtn.classList.add("disable");
-  document.getElementsByClassName("card__img-save").add.classList("disabled");
-  
-  card.disabled = true;
-  document.getElementsByClassName("card__img-save").disabled = true;
-  console.log(document.getElementsByClassName("card__img-save"));
-
-  const body = document.getElementById("root");
-  body.classList.add("background");
-
-  */
-
-  const button = e.target;
-  // button.disabled = true;
   const card = e.target.closest(".card");
-  const deskMenu = buildDeskMenu();
-  if (flag) {
-    card.appendChild(deskMenu);
-    flag = false;
-    console.log("if", flag);
+  let deskMenu = card.querySelector(".desk_card");
+  if (deskMenu) {
+    deskMenu.remove();
   } else {
-    console.log(card);
-    flag = true;
-    console.log("else", flag);
-    console.log(deskMenu);
-    console.log();
-    card.removeChild(card.lastChild);
+    deskMenu = buildDeskMenu();
+    card.appendChild(deskMenu);
+    deskMenu.addEventListener("click", function (e) {
+      const element = e.target;
+      if (element.classList.contains("wrapper__item")) {
+        const id = element.dataset.id;
+        const deskMenuItems = getDesks();
+        deskMenuItems.forEach((item) => {
+          if (item.id === id) {
+            let array = item.cards;
+            array.push(card.dataset.id);
+          }
+        });
+      }
+      card.removeChild(deskMenu);
+    });
   }
-
-  // window.addEventListener("click", (e) => {
-  //   let hero = document.getElementById("root");
-  //   hero.classList.add("background");
-  //   console.log(hero);
-  //   console.log(e.target);
-
-  // if (e.target !== deskMenu) {
-  //   card.removeChild(deskMenu);
-  //   console.log(hero);
-  // }
-  // });
-
-  deskMenu.addEventListener("click", function (e) {
-    const element = e.target;
-    console.log(e.target);
-    if (element.classList.contains("wrapper__item")) {
-      const id = element.dataset.id;
-      const deskMenuItems = getDesks();
-      deskMenuItems.forEach((item) => {
-        if (item.id === id) {
-          let array = item.cards;
-          array.push(card.dataset.id);
-        }
-      });
-    }
-    card.removeChild(deskMenu);
-    flag = true;
-    button.disabled = false;
-  });
-
-  console.log("saveButton");
 }
 
-// const input = document.querySelector(".main-manu__search");
-const input = buildMainMenu();
-console.log(input);
+function popUp(e) {
+  const card = e.target.closest(".card");
 
-input.addEventListener("input", search);
+  const desc = card.lastChild;
+  const cloneDesc = desc.cloneNode(true);
 
-function search(e) {
-  console.log(e.target.value);
-  let array = getCards();
-  let searchArray = [];
-  console.log(array);
+  const image = e.target.closest(".card__img");
+  const cloneImage = image.cloneNode(true);
 
-  array.forEach((item) => console.log(typeof item.desc));
-  array.forEach((card) => {
-    if (card.desc.includes(e.target.value)) searchArray.push(card);
+  const btns = card.firstChild.children;
+
+  const saveBtn = btns.item(1);
+  const cloneSaveBtn = saveBtn.cloneNode(true);
+
+  const reportBtn = btns.item(2);
+  const cloneReportBtn = reportBtn.cloneNode(true);
+
+  const hideBtn = btns.item(3);
+  const cloneHideBtn = hideBtn.cloneNode(true);
+
+  const hero = document.createElement("div");
+  const modal = document.createElement("div");
+  const photo = document.createElement("div");
+  const body = document.querySelector("body");
+
+  modal.dataset.id = card.id;
+
+  hero.classList.add("modal");
+  modal.classList.add("modal__popUp");
+  photo.classList.add("modal__photo");
+  desc.classList.add("modal__desc");
+
+  cloneImage.classList.add("modal__img");
+  cloneDesc.style.display = "block";
+  cloneSaveBtn.style.display = "block";
+  cloneReportBtn.style.display = "block";
+  cloneHideBtn.style.display = "block";
+
+  photo.append(cloneImage);
+  modal.append(photo, cloneReportBtn, cloneHideBtn, cloneSaveBtn, cloneDesc);
+  hero.append(modal);
+  body.append(hero);
+
+  cloneSaveBtn.addEventListener("click", savePin);
+
+  window.addEventListener("click", function (e) {
+    if (e.target === hero) {
+      hero.style.display = "none";
+    }
   });
-  console.log(searchArray);
-  setDesks(searchArray)
-  buildMainArea(searchArray);
 }
 
 export { buildInterestCard };
