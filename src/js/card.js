@@ -71,9 +71,8 @@ function sendComplain(e) {
   const card = e.target.closest(".card");
   const complaintWindow = buildComplainWindow(card.dataset.id);
   card.appendChild(complaintWindow);
+  document.body.style.overflow = "hidden";
 
-  // const id = e.currentTarget.closest(".card").id;
-  // buildComplaintCard(id);
 }
 
 function hidePin(e) {
@@ -91,22 +90,27 @@ function hidePin(e) {
 
 function savePin(e) {
   const card = e.target.closest(".card");
-  const deskMenu = buildDeskMenu();
-  card.appendChild(deskMenu);
-  deskMenu.addEventListener("click", function (e) {
-    const element = e.target;
-    if (element.classList.contains("wrapper__item")) {
-      const id = element.dataset.id;
-      const deskMenuItems = getDesks();
-      deskMenuItems.forEach((item) => {
-        if (item.id === id) {
-          let array = item.cards;
-          array.push(card.dataset.id);
-        }
-      });
-    }
-    card.removeChild(deskMenu);
-  });
+  let deskMenu = card.querySelector('.desk_card');
+  if (deskMenu) {
+    deskMenu.remove();
+  } else {
+    deskMenu = buildDeskMenu();
+    card.appendChild(deskMenu);
+    deskMenu.addEventListener("click", function (e) {
+      const element = e.target;
+      if (element.classList.contains("wrapper__item")) {
+        const id = element.dataset.id;
+        const deskMenuItems = getDesks();
+        deskMenuItems.forEach((item) => {
+          if (item.id === id) {
+            let array = item.cards;
+            array.push(card.dataset.id);
+          }
+        });
+      }
+      card.removeChild(deskMenu);
+    });
+  }
 }
 
 export { buildInterestCard };

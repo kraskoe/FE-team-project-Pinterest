@@ -44,6 +44,8 @@ function buildMainMenu() {
         document.getElementById('root').append(buildMainArea());
     })
 
+    menuInput.addEventListener('input' ,searchPins);
+
     return menuSection;
     }
 
@@ -232,9 +234,22 @@ function saveCard(event) {
     let menu = event.target.closest('.wrapper__item');
     let desks = getDesks();
     let desk = desks.find(el => el.id === deskID);
-    desk.cards.push(cardID);
-    setDesks(desks);
+    if (!desk.cards.includes(cardID)) {
+        desk.cards.push(cardID);
+        setDesks(desks);
+    }
+
     menu.remove();
+}
+
+function searchPins() {
+    const search = document.querySelector('.main-manu__search');
+    if (search.value.length >=3 || search.value.length === 0) {
+        const content = document.getElementById("main-area");
+        const deskId = content.dataset.deskId;
+        content.remove();
+        document.getElementById("root").append(buildMainArea(deskId));
+    }
 }
 
 export {buildMainMenu, buildDeskMenu};

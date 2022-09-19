@@ -34,7 +34,7 @@ function handleCards(mainArea) {
         cards = tempArr;
     }
     if (search.value.length >= 3) {
-        cards.filter(card => card.desc.toLowerCase().includes(search.value.toLowerCase()));
+        cards = cards.filter(card => card.desc.toLowerCase().includes(search.value.toLowerCase()));
     }
     return cards;
 }
