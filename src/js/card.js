@@ -95,6 +95,7 @@ function hidePin(e) {
 function savePin(e) {
   const card = e.target.closest(".card");
   let deskMenu = card.querySelector(".desk_card");
+
   if (deskMenu) {
     deskMenu.remove();
   } else {
@@ -167,6 +168,7 @@ function popUp(e) {
       hero.style.display = "none";
     }
   });
+
 }
 
 export { buildInterestCard };

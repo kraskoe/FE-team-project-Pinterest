@@ -116,12 +116,15 @@ function buildComplainWindow(pinId) {
     furtherButton.addEventListener('click', () => {
         sendData(pinId, radioButtons);
         wrapper.remove()
+        document.body.style.overflow = "";
     })
-    cancelButton.addEventListener('click', () => wrapper.remove())
+    cancelButton.addEventListener('click', () => {
+        wrapper.remove()
+        document.body.style.overflow = "";
+    })
+
     return wrapper
 }
-
-document.body.append(buildComplainWindow())
 
 function sendData(cardId, radioButtons) {
     const checkedButton = radioButtons.find((value, index, obj) => { return value.checked })
