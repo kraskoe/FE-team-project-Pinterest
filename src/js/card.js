@@ -73,14 +73,16 @@ function buildInterestCard(card) {
 }
 
 function sendComplain(e) {
-  const card = e.target.closest(".card");
+  e.stopPropagation();
+  const card = e.target.closest(".card") || e.target.closest(".modal__popUp");
   const complaintWindow = buildComplainWindow(card.dataset.id);
-  card.appendChild(complaintWindow);
+  document.getElementById('root').appendChild(complaintWindow);
   document.body.style.overflow = "hidden";
 }
 
 function hidePin(e) {
-  const card = e.target.closest(".card");
+  e.stopPropagation();
+  const card = e.target.closest(".card") || e.target.closest(".modal__popUp");
   const id = card.dataset.id;
   let items = getHiddenPins();
   items.push(card.dataset.id);
@@ -93,7 +95,8 @@ function hidePin(e) {
 }
 
 function savePin(e) {
-  const card = e.target.closest(".card");
+  e.stopPropagation();
+  const card = e.target.closest(".card") || e.target.closest(".modal__popUp");
   let deskMenu = card.querySelector(".desk_card");
 
   if (deskMenu) {
@@ -119,6 +122,7 @@ function savePin(e) {
 }
 
 function popUp(e) {
+  document.body.style.overflow = "hidden";
   const card = e.target.closest(".card");
 
   const desc = card.lastChild;
@@ -143,7 +147,7 @@ function popUp(e) {
   const photo = document.createElement("div");
   const body = document.querySelector("body");
 
-  modal.dataset.id = card.id;
+  modal.dataset.id = card.dataset.id;
 
   hero.classList.add("modal");
   modal.classList.add("modal__popUp");
@@ -162,10 +166,13 @@ function popUp(e) {
   body.append(hero);
 
   cloneSaveBtn.addEventListener("click", savePin);
+  cloneReportBtn.addEventListener("click", sendComplain);
+  cloneHideBtn.addEventListener("click", hidePin);
 
   window.addEventListener("click", function (e) {
     if (e.target === hero) {
-      hero.style.display = "none";
+      hero.remove();
+      document.body.style.overflow = "";
     }
   });
 

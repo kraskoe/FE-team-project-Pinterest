@@ -9,11 +9,16 @@
   width: 75%;
   padding: 10px 12px;
   border-radius: 27px;
-  font-size: 15px;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
   background-color: #dcdcdc;
   border: none;
   color: #333;
   flex: (1, 0, auto);
+}
+.main-manu__search::placeholder {
+  font-size: 1rem;
+  font-family: Roboto, sans-serif;
 }
 .main-menu__logo{
   padding: 5px;

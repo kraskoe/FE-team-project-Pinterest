@@ -3,9 +3,9 @@ import {buildMainArea} from "./main-area";
 import {v4 as uuidv4} from "uuid";
 
 function Desk(name) {
-    this.id = uuidv4()
-    this.name = name
-    this.cards = []
+    this.id = uuidv4();
+    this.name = name;
+    this.cards = [];
 }
 function buildMainMenu() {
     const menuSection = document.createElement('section');
@@ -42,12 +42,13 @@ function buildMainMenu() {
         const content = document.getElementById("main-area");
         content.remove();
         document.getElementById('root').append(buildMainArea());
+        if (deskScreen.classList.contains('active')) deskScreen.classList.remove('active');
     })
 
     menuInput.addEventListener('input' ,searchPins);
 
     return menuSection;
-    }
+}
 
 function  buildDeskMenu(mode) {
 
@@ -173,6 +174,7 @@ function buildItemDesk(mode, id, name) {
             saveBtnItem.style.display = "block";
             cancelBtnItem.style.display = "block";
             itemDesk.readOnly = false;
+            itemDesk.removeEventListener('click', rebuildMainAreaDesk);
         })
 
         cancelBtnItem.addEventListener('click', function () {
@@ -184,6 +186,7 @@ function buildItemDesk(mode, id, name) {
             saveBtnItem.style.display = "none";
             cancelBtnItem.style.display = "none";
             itemDesk.readOnly = true;
+            itemDesk.addEventListener('click', rebuildMainAreaDesk);
         })
 
         deleteBtnItem.addEventListener('click',function () {
@@ -209,6 +212,7 @@ function buildItemDesk(mode, id, name) {
                 cancelBtnItem.style.display = "none";
                 itemDesk.readOnly = true;
             } else itemDesk.placeholder = 'Введите текст';
+            itemDesk.addEventListener('click', rebuildMainAreaDesk);
         })
     }
 
@@ -229,7 +233,8 @@ function rebuildMainAreaDesk(event) {
 }
 
 function saveCard(event) {
-    let cardID = event.target.closest('.card').dataset.id;
+    let card = event.target.closest('.card') || event.target.closest('.modal__popUp');
+    let cardID = card.dataset.id;
     let deskID = event.target.closest('.wrapper__item').dataset.id;
     let menu = event.target.closest('.wrapper__item');
     let desks = getDesks();
