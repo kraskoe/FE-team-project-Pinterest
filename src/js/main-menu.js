@@ -233,17 +233,17 @@ function rebuildMainAreaDesk(event) {
 }
 
 function saveCard(event) {
+    event.stopPropagation();
     let card = event.target.closest('.card') || event.target.closest('.modal__popUp');
     let cardID = card.dataset.id;
     let deskID = event.target.closest('.wrapper__item').dataset.id;
-    let menu = event.target.closest('.wrapper__item');
+    let menu = event.target.closest('.desk_card');
     let desks = getDesks();
     let desk = desks.find(el => el.id === deskID);
     if (!desk.cards.includes(cardID)) {
         desk.cards.push(cardID);
         setDesks(desks);
     }
-
     menu.remove();
 }
 
